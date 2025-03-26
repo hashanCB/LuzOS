@@ -84,8 +84,8 @@ const TopBar = () => {
         </div>
 
         {/* Right Section - Status Icons */}
-        <div className='flex items-center gap-4'>
-          <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-6'>
+          <div className='flex items-center gap-4'>
             <Bluetooth className='w-4 h-4 text-white' />
             <Keyboard className='w-4 h-4 text-white' />
             <Image 
@@ -108,7 +108,7 @@ const TopBar = () => {
               width={16} 
               height={16} 
               alt='switch'
-              className='opacity-80'
+              className='opacity-80 rotate-x-180'
             />
             <Image 
               src="/Logo/siri.png" 
