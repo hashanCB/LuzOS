@@ -1,37 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# LuzOS - A macOS-Inspired Web Experience (Ongoing)  
 
-## Getting Started
+🌟 **LuzOS** is a web-based macOS clone designed to bring the elegance and functionality of macOS right to your browser. Built with **React** and **Next.js**, LuzOS delivers a smooth, interactive, and desktop-like experience on the web.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Features  
+✅ **Desktop Icons** – Clickable and selectable just like macOS  
+✅ **Redux State Management** – Seamless interaction and state control  
+✅ **Next.js Optimization** – Server-side rendering and efficient loading  
+✅ **Smooth Animations** – A fluid user experience inspired by macOS  
+✅ **Dynamic Window Management** – (Coming Soon 🚧)  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🛠️ Tech Stack  
+- **Frontend:** React, Next.js  
+- **State Management:** Redux  
+- **Styling:** Tailwind CSS  
+- **Icons & UI Elements:** Custom-designed to resemble macOS  
+- **Deployment:** Vercel (for live demo, optional)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📸 Preview  
 
-To learn more about Next.js, take a look at the following resources:
+https://luz-os.vercel.app/
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# LuzOS
