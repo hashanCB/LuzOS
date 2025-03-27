@@ -6,7 +6,7 @@ import Icone from './Icone'
 import { useDispatch } from 'react-redux'
 import { DesktopIconSelect } from '../Redex/IconSelete'
 
-const floderList = ["Hashan" , "MyProjects" , "Videos" , "Music" , "Documents" , "Images"]
+const floderList = ["Hashan" , "MyProjects" , "Videos" , "Music" , "Documents" , "Photos"]
 const page = () => {
   const dispath = useDispatch()
 

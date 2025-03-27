@@ -1,0 +1,11 @@
+version : "v1"
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - Luzos:/app
+    restart: always
+volumes:
+  Luzos:
