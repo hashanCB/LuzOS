@@ -1,5 +1,6 @@
 import TopBar from '@/app/TopBar/page'
 import Desktop from '@/app/Desktop/page'
+import Floder from '@/app/Floder/page'
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
       <div className="h-[calc(100vh-2rem)] mt-8 relative">
         {/* Add desktop content here */}
         <Desktop />
-      
+        <Floder />
       </div>
     </main>
   );
