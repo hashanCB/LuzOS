@@ -90,7 +90,7 @@ const page = () => {
                             </div>
 
                             {/* fav list */}
-                    <ScrollArea className="h-100  w-[150px] rounded-md border">
+                    <ScrollArea className="h-100  w-[150px] rounded-md ">
                             <div>
                                 <label className=' text-mactext text-[12px] font-bold '>Favourites</label>
                                 <ul className=' text-white mt-2'>
