@@ -18,7 +18,7 @@
 - **State Management:** Redux  
 - **Styling:** Tailwind CSS  
 - **Icons & UI Elements:** Custom-designed to resemble macOS  
-- **Deployment:** Vercel (for live demo, optional)
+- **Deployment:** Vercel (for live demo)
 
 ---
 
