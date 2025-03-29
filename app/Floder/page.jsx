@@ -1,7 +1,11 @@
-import Image from 'next/image'
+'use client'
+
 import React from 'react'
 import { BookA, Dock, Film, Send,ArrowDownToLine,File,House,Cloud ,SquareArrowOutUpRight} from 'lucide-react'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import Draggable from "react-draggable";
+import { useRef } from "react";
+
 
 const FavList = [
     {
@@ -75,8 +79,14 @@ const tagsList = [ {
     coloer:  "bg-macgray" 
 }  ]
 const page = () => {
+    const nodeRef = useRef(null);
+
+
   return (
-    <div className=' absolute  top-16 left-[20%]  h-[500px] w-[800px] bg-[#1C1C1E] border-2 border-white/40 rounded-xl'>
+
+<Draggable nodeRef={nodeRef}>
+    
+    <div ref={nodeRef} className=' absolute  top-16 left-[20%]  h-[500px] w-[800px] bg-[#1C1C1E] border-2 border-white/40 rounded-xl'>
         <div className=' flex m-4'>
                     {/* SIDER VIEW */}
                   
@@ -159,10 +169,11 @@ const page = () => {
          
                     {/* MAIN VIEW */}
             <div>
-                Main
+      
             </div>
         </div>
     </div>
+    </Draggable>
   )
 }
 
