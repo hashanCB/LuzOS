@@ -1,12 +1,12 @@
 'use client'
 
-import React from 'react'
-import { BookA, Dock, Film, Send,ArrowDownToLine,File,House,Cloud ,SquareArrowOutUpRight} from 'lucide-react'
+import React, { useState } from 'react'
+import { BookA, Dock,LayoutGrid, Film,ChevronRight, Send,ArrowDownToLine,Columns3,PanelBottomDashed,File,House,Cloud ,SquareArrowOutUpRight, ArrowLeftIcon, ArrowRightIcon, List, TableCellsMerge, ChevronDown, ChevronsLeft, ChevronsRight, ChevronLeft, Share, Tag, CircleEllipsis, Search} from 'lucide-react'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import Draggable from "react-draggable";
 import { useRef } from "react";
-
-
+import { Resizable } from 'react-resizable'
+import 'react-resizable/css/styles.css'
 const FavList = [
     {
         name : "AirDrop",
@@ -80,27 +80,42 @@ const tagsList = [ {
 }  ]
 const page = () => {
     const nodeRef = useRef(null);
+    const [size, setSize] = useState({ width: 800, height: 500 })
 
+    const onResize = (event, { size }) => {
+        setSize({ width: size.width, height: size.height })
+    }
 
   return (
 
-<Draggable nodeRef={nodeRef}>
-    
-    <div ref={nodeRef} className=' absolute  top-16 left-[20%]  h-[500px] w-[800px] bg-[#1C1C1E] border-2 border-white/40 rounded-xl'>
-        <div className=' flex m-4'>
+
+<Draggable nodeRef={nodeRef} handle='#dragheder' cancel='#scroll-area'>
+<Resizable
+                width={size.width}
+                height={size.height}
+                onResize={onResize}
+                minConstraints={[100, 100]}
+                maxConstraints={[1600, 1000]}
+                resizeHandles={['ne', 'nw', 'se', 'sw']}
+               
+            >
+    <div ref={nodeRef} 
+    style={{ width: size.width + 'px', height: size.height + 'px' }}
+    className=' absolute -top-[500px] left-[300px]  bg-[#1C1C1E] border-2 border-white/40 rounded-xl '>
+        <div className=' flex m-4 ' style={{ width: size.width + 'px'}} >
                     {/* SIDER VIEW */}
                   
-                      <div className=' flex flex-col gap-6'>
+                      <div id='dragheder'  className=' flex flex-col gap-6 '>
 
                             {/* controll Button */}
-                            <div className=' flex gap-2 '>
+                            <div className=' flex gap-2   '>
                                 <div className=' size-3 bg-[#fe5e56] rounded-full'></div>
                                 <div className=' size-3 bg-[#ffbb2c] rounded-full'></div>
                                 <div className=' size-3 bg-[#27c73f] rounded-full'></div>
                             </div>
 
                             {/* fav list */}
-                    <ScrollArea className="h-100  w-[150px] rounded-md ">
+                    <ScrollArea id ="scroll-area" style={{ height: (size.height -100) + 'px'}} className="  w-[150px] rounded-md ">
                             <div>
                                 <label className=' text-mactext text-[12px] font-bold '>Favourites</label>
                                 <ul className=' text-white mt-2'>
@@ -165,7 +180,75 @@ const page = () => {
 
                      </div>
 
-                      
+                      <div className=' w-full'>
+                        
+                            {/* nav bar in body */}
+                            <div className=' flex  items-center  '>
+                                {/* start */}
+                                <div className='  flex gap-2 flex-3/12 justify-start'>
+                                    <div>
+                                        <ChevronLeft className=' text-white'/>
+                                    </div>
+                                    <div>
+                                        <ChevronRight  className=' text-white/10'/>
+                                     
+                                    </div>
+                                    <div>
+                                        <h1 className=' text-white  font-semibold'>Hashan </h1>
+                                    </div>
+                                </div>
+                                {/* center */}
+                                <div className=' flex  flex-6/12 gap-2  justify-center'>
+                                    <div>
+                                    <LayoutGrid className=' text-white' />
+                                    </div>
+
+                                    <div>
+                                    <List className=' text-white'  />
+                                    </div>
+
+                                    <div>
+                                    <Columns3 className=' text-white' />
+                                    </div>
+
+                                    <div>
+                                    <PanelBottomDashed className=' text-white' />
+                                    </div>
+                                </div>
+
+                                {/* end */}
+                                <div className=' flex flex-3/12 items-center gap-3 justify-end'>
+                                    <div className=' flex text-white  items-center'>
+                                    <TableCellsMerge />
+                                    
+                                    <ChevronDown size={16}/>
+                                    </div>
+
+                                    <div>
+                                    <Share className=' text-white'  />
+                                    </div>
+
+                                    <div>
+                                        <Tag className=' rotate-y-180  text-white' />
+                                    </div>
+
+                                    <div  className=' flex items-center text-white' >
+                                   
+                                    <CircleEllipsis/>
+                                    <ChevronDown size={16}/>
+                                    </div>
+
+
+                                    <div className=' flex gap-2 ' >
+                                     
+                                      <Search className=' text-white/40'/>
+                                     <input type='text' className='focus:outline-none caret-white/30 border-none placeholder:text-white/40 ' placeholder='Search'  />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                      </div>
          
                     {/* MAIN VIEW */}
             <div>
@@ -173,7 +256,9 @@ const page = () => {
             </div>
         </div>
     </div>
+    </Resizable>
     </Draggable>
+   
   )
 }
 
