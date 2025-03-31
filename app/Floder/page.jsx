@@ -7,6 +7,7 @@ import Draggable from "react-draggable";
 import { useRef } from "react";
 import { Resizable } from 'react-resizable'
 import 'react-resizable/css/styles.css'
+import { motion } from 'framer-motion'
 const FavList = [
     {
         name : "AirDrop",
@@ -81,7 +82,7 @@ const tagsList = [ {
 const page = () => {
     const nodeRef = useRef(null);
     const [size, setSize] = useState({ width: 800, height: 500 })
-
+    const iconHind = 400
     const onResize = (event, { size }) => {
         setSize({ width: size.width, height: size.height })
     }
@@ -94,7 +95,7 @@ const page = () => {
                 width={size.width}
                 height={size.height}
                 onResize={onResize}
-                minConstraints={[100, 100]}
+                minConstraints={[500, 100]}
                 maxConstraints={[1600, 1000]}
                 resizeHandles={['ne', 'nw', 'se', 'sw']}
                
@@ -183,67 +184,73 @@ const page = () => {
                       <div className=' w-full'>
                         
                             {/* nav bar in body */}
-                            <div className=' flex  items-center  '>
+                            <div id ='dragheder' className=' flex  gap-4 items-center   '>
                                 {/* start */}
-                                <div className='  flex gap-2 flex-3/12 justify-start'>
-                                    <div>
-                                        <ChevronLeft className=' text-white'/>
-                                    </div>
-                                    <div>
-                                        <ChevronRight  className=' text-white/10'/>
-                                     
-                                    </div>
-                                    <div>
-                                        <h1 className=' text-white  font-semibold'>Hashan </h1>
-                                    </div>
+                                <div className='  flex flex-3/12 gap-2 justify-start'>
+                                        <div>
+                                            <ChevronLeft className=' text-white' size={20}/>
+                                        </div>
+                                        <div>
+                                            <ChevronRight  className=' text-white/10' size={20}/>
+                                        
+                                        </div>
+                                        <div className=' w-[75px]'>
+                                            <h1 className=' text-white  font-semibold truncate '>Hashan sdfsdf sdfsdf sdf </h1>
+                                        </div>
                                 </div>
+
+
                                 {/* center */}
-                                <div className=' flex  flex-6/12 gap-2  justify-center'>
-                                    <div>
-                                    <LayoutGrid className=' text-white' />
+                                <div className=' flex  flex-6/12  min-w-0 gap-2  justify-center'>
+                                    <div  >
+                                    <LayoutGrid className={` text-white  ${size.width < 600 ? "hidden" : ""}` } size={20}/>
                                     </div>
 
-                                    <div>
-                                    <List className=' text-white'  />
+                                    <div  >
+                                    <List className={` text-white  ${size.width < 800 ? "hidden" : ""} ` } size={20} />
                                     </div>
 
-                                    <div>
-                                    <Columns3 className=' text-white' />
+                                    <div  >
+                                    <Columns3 className={` text-white ${size.width < 800 ? "hidden" : ""} ` } size={20} />
                                     </div>
 
-                                    <div>
-                                    <PanelBottomDashed className=' text-white' />
+                                    <div className={` ${size.width < 600 ? "hidden" : ""}`} >
+                                    <PanelBottomDashed className={` text-white ` } size={20}/>
                                     </div>
                                 </div>
 
                                 {/* end */}
-                                <div className=' flex flex-3/12 items-center gap-3 justify-end'>
-                                    <div className=' flex text-white  items-center'>
-                                    <TableCellsMerge />
-                                    
-                                    <ChevronDown size={16}/>
-                                    </div>
+                                <div className=' flex  flex-3/12   items-center gap-3 justify-end'>
 
-                                    <div>
-                                    <Share className=' text-white'  />
-                                    </div>
+                                            <div  className={` flex text-white  items-center  ${size.width < 600 ? "hidden" : ""}  `} size={20}>
+                                            <TableCellsMerge className='flex-shrink-0' size={20}/>
+                                                    
+                                            <ChevronDown  size={16}/>
+                                            </div>
 
-                                    <div>
-                                        <Tag className=' rotate-y-180  text-white' />
-                                    </div>
+                                            <div>
+                                                        
+                                             <Share className={` text-white ${size.width < 800 ? "hidden" : ""} `   } size={20} />
+                                            </div>
 
-                                    <div  className=' flex items-center text-white' >
-                                   
-                                    <CircleEllipsis/>
-                                    <ChevronDown size={16}/>
-                                    </div>
+                                            <div >
+                                             <Tag className={`text-white rotate-y-180 ${size.width < 800 ? "hidden" : ""} `} size={20} />
+                                            </div>
+                                                    
+
+                                            <div className={`items-center  flex text-white ${size.width < 600 ? "hidden" : ""} `} >
+                                                
+                                                    <CircleEllipsis size={20}/>
+                                                    <ChevronDown size={16}/>
+                                            
+                                            </div>
 
 
-                                    <div className=' flex gap-2 ' >
-                                     
-                                      <Search className=' text-white/40'/>
-                                     <input type='text' className='focus:outline-none caret-white/30 border-none placeholder:text-white/40 ' placeholder='Search'  />
-                                    </div>
+                                            <div  className=' flex gap-2  mr-10 items-center ' >
+                                            
+                                            <Search className=' text-white/40' size={20}/>
+                                            <input  type='text' className='w-[100px] focus:outline-none caret-white/30 border-none placeholder:text-white/40 text-white ' placeholder='Search'   />
+                                            </div>
                                 </div>
                             </div>
 
