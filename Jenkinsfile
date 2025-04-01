@@ -1,9 +1,15 @@
 pipeline{
    agent any
+   environment:{
+
+   }
     stages{
-        stage("A"){
+        stage("Check Node"){
             steps{
-                echo "========executing A========"
+                script{
+                    sh 'node --version'
+
+                }
             }
           
         }
