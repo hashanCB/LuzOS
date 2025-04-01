@@ -1,13 +1,15 @@
 'use client'
 
 import React, { useState } from 'react'
-import { BookA, Dock,LayoutGrid, Film,ChevronRight, Send,ArrowDownToLine,Columns3,PanelBottomDashed,File,House,Cloud ,SquareArrowOutUpRight, ArrowLeftIcon, ArrowRightIcon, List, TableCellsMerge, ChevronDown, ChevronsLeft, ChevronsRight, ChevronLeft, Share, Tag, CircleEllipsis, Search} from 'lucide-react'
+import { BookA, Dock,LayoutGrid, Film,ChevronRight, Send,ArrowDownToLine,Columns3,PanelBottomDashed,File,House,Cloud ,SquareArrowOutUpRight, ArrowLeftIcon, ArrowRightIcon, List, TableCellsMerge, ChevronDown, ChevronsLeft, ChevronsRight, ChevronLeft, Share, Tag, CircleEllipsis, Search, X, Minus, Maximize, Maximize2} from 'lucide-react'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import Draggable from "react-draggable";
 import { useRef } from "react";
 import { Resizable } from 'react-resizable'
 import 'react-resizable/css/styles.css'
-import { motion } from 'framer-motion'
+import { animate, motion,  } from 'framer-motion'
+import { useDispatch } from 'react-redux';
+import { DesktopIconSelect } from '../Redex/IconSelete';
 const FavList = [
     {
         name : "AirDrop",
@@ -87,10 +89,21 @@ const page = () => {
         setSize({ width: size.width, height: size.height })
     }
 
-  return (
+    //redux
+    const dispath = useDispatch()
 
+  return (
+    <motion.div 
+    initial={{ opacity : 0 , scale: 0.9}}
+    animate={{ opacity:100 , scale: 1}}
+    exit={{ opacity:0 ,scale:0.9}}
+    transition={{duration: 0.3}}
+    >
 
 <Draggable nodeRef={nodeRef} handle='#dragheder' cancel='#scroll-area'>
+  
+
+  
 <Resizable
                 width={size.width}
                 height={size.height}
@@ -109,10 +122,16 @@ const page = () => {
                       <div id='dragheder'  className=' flex flex-col gap-6 '>
 
                             {/* controll Button */}
-                            <div className=' flex gap-2   '>
-                                <div className=' size-3 bg-[#fe5e56] rounded-full'></div>
-                                <div className=' size-3 bg-[#ffbb2c] rounded-full'></div>
-                                <div className=' size-3 bg-[#27c73f] rounded-full'></div>
+                            <div className=' flex gap-2 group '>
+                                <div className=' size-3 bg-[#fe5e56] rounded-full' onClick={()=>dispath(DesktopIconSelect(-1))}>
+                                    <X className=' hidden group-hover:block text-black  size-3'/>
+                                </div>
+                                <div className=' size-3 bg-[#ffbb2c] rounded-full'>
+                                <Minus className=' hidden group-hover:block text-black  size-3'/>
+                                </div>
+                                <div className='  size-3 bg-[#27c73f] rounded-full'>
+                                 <Maximize2 className='  hidden group-hover:flex p-[2px] text-black  size-3 font-extrabold rotate-y-180'/>
+                                </div>
                             </div>
 
                             {/* fav list */}
@@ -265,7 +284,7 @@ const page = () => {
     </div>
     </Resizable>
     </Draggable>
-   
+    </motion.div>
   )
 }
 
