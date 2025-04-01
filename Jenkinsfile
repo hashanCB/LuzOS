@@ -1,7 +1,7 @@
 pipeline{
    agent any
-   environment:{
-
+   environment{
+         NODE_VERSION = '20.16.0'
    }
     stages{
         stage("Check Node"){
