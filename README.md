@@ -1,4 +1,5 @@
 # LuzOS - A macOS-Inspired Web Experience (Ongoing)  
+<img width="1439" alt="Screenshot 2025-04-01 at 22 51 50" src="https://github.com/user-attachments/assets/92be750c-f5ab-4ff9-b68d-5b9bf89a14a2" />
 
 🌟 **LuzOS** is a web-based macOS clone designed to bring the elegance and functionality of macOS right to your browser. Built with **React** and **Next.js**, LuzOS delivers a smooth, interactive, and desktop-like experience on the web.
 
