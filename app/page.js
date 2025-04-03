@@ -3,6 +3,7 @@ import TopBar from '@/app/TopBar/page'
 import Desktop from '@/app/Desktop/page'
 import Floder from '@/app/Floder/page'
 import { useSelector } from 'react-redux';
+import DownBarDesktop from '@/app/DownBarDesktop/page'
 import { AnimatePresence } from 'framer-motion';
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
         {isSeleted  !== -1 ?  <Floder /> : [] }
         </AnimatePresence>
       
+        <DownBarDesktop/>
        
       </div>
     </main>
