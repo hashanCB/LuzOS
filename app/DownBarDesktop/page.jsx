@@ -9,7 +9,7 @@ const FooterBarIcon = [
     },
     {
         name : "LunchPad",
-        url : <Image src={'/Logo/LunchPad.png'} className=' w-[45px] h-[45px]' width={180} height={180} alt='apple Lounchpad' />
+        url : <Image src={'/Logo/Lunchpad.png'} className=' w-[45px] h-[45px]' width={180} height={180} alt='apple Lounchpad' />
     },
     {
         name : "Messages",
