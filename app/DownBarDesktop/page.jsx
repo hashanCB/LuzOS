@@ -52,7 +52,7 @@ const page = () => {
     const [hover,setHover] = useState(undefined)
     console.log(hover-1)
   return (
-    <div className='absulute bottom-0 left-0 right-0  '>
+    <div className='fixed bottom-0 left-0 right-0  '>
        
         <div 
       
@@ -90,7 +90,7 @@ const page = () => {
                             
                         
                         }
-                    transition={{ type: "spring", stiffness: 250, damping: 15 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 15 }}
                     key={index}
                     onMouseEnter={()=>setHover(index)}
                     onMouseOut={()=>setHover(null)}

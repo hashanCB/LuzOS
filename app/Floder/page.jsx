@@ -8,8 +8,10 @@ import { useRef } from "react";
 import { Resizable } from 'react-resizable'
 import 'react-resizable/css/styles.css'
 import { animate, motion,  } from 'framer-motion'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { DesktopIconSelect } from '../Redex/IconSelete';
+import Aboutme from '../Files/About/page';
+import { FolderList } from '../Data/FolderList';
 const FavList = [
     {
         name : "AirDrop",
@@ -82,6 +84,7 @@ const tagsList = [ {
     coloer:  "bg-macgray" 
 }  ]
 const page = () => {
+    const FolderLists = FolderList()
     const nodeRef = useRef(null);
     const [size, setSize] = useState({ width: 800, height: 500 })
     const iconHind = 400
@@ -91,6 +94,7 @@ const page = () => {
 
     //redux
     const dispath = useDispatch()
+    const isSelectFolder = useSelector((state)=>state.IconSelete.isSeleted)
 
   return (
     <motion.div 
@@ -200,7 +204,7 @@ const page = () => {
 
                      </div>
 
-                      <div className=' w-full'>
+                      <div className=' flex flex-col gap-2 w-full'>
                         
                             {/* nav bar in body */}
                             <div id ='dragheder' className=' flex  gap-4 items-center   '>
@@ -272,8 +276,12 @@ const page = () => {
                                             </div>
                                 </div>
                             </div>
-
-
+                            
+                            
+                            <div className='mt-5 pr-5 w-full h-full'>
+                            {FolderLists &&  FolderLists[isSelectFolder]?.page}
+                            </div>
+                               
                       </div>
          
                     {/* MAIN VIEW */}
