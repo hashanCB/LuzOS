@@ -119,7 +119,7 @@ const page = () => {
             >
     <div ref={nodeRef} 
     style={{ width: size.width + 'px', height: size.height + 'px' }}
-    className=' absolute -top-[500px] left-[300px]  bg-[#1C1C1E] border-2 border-white/40 rounded-xl '>
+    className=' absolute -top-[500px] left-[300px]  bg-[#1C1C1E] border-2 border-white/40 rounded-xl z-[30] '>
         <div className=' flex m-4 ' style={{ width: size.width + 'px'}} >
                     {/* SIDER VIEW */}
                   

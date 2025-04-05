@@ -60,7 +60,7 @@ const TopBar = () => {
   const [isWifiOpen, setIsWifiOpen] = useState(false);
 
   return (
-    <div className='fixed top-0 left-0 right-0 h-8 bg-black/40 backdrop-blur-md border-b  z-50'>
+    <div className='fixed top-0 left-0 right-0 h-8 bg-black/40 backdrop-blur-md  z-50'>
       <div className='flex items-center justify-between px-4 h-full'>
         {/* Left Section - Apple Logo and Menu */}
         <div className='flex items-center gap-6'>
