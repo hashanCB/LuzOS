@@ -6,6 +6,7 @@ import Icone from './Icone'
 import { useDispatch } from 'react-redux'
 import { DesktopIconClick, DesktopIconSelect } from '../Redex/IconSelete'
 import { FolderList } from '../Data/FolderList'
+import { addFileTask, addTask } from '../Redex/CurrentTask'
 
 
 const floderList =FolderList()
@@ -15,7 +16,7 @@ const page = () => {
 
   const SingalClick = (index) =>{
     dispath(DesktopIconSelect(index))
-   
+    dispath(addFileTask(index))
   }
 
   const OneClick = (index) => {

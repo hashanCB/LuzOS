@@ -3,7 +3,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    isSeleted : -1,
+    isSeleted : [],
     isClick : -1
 }
 export const IconSelete = createSlice({
@@ -11,7 +11,11 @@ export const IconSelete = createSlice({
     initialState,
     reducers:{
         DesktopIconSelect : (state,action) =>{
-            state.isSeleted = action.payload
+            state.isSeleted = [... state.isSeleted ,action.payload]
+        },
+
+        DesktopIconRemove : (state,action) =>{
+            state.isSeleted = state.isSeleted.filter((ele,index)=>index !== action.payload) 
         },
 
         DesktopIconClick : (state,action) => {
@@ -21,4 +25,4 @@ export const IconSelete = createSlice({
 })
 
 export default IconSelete.reducer
-export const {DesktopIconSelect , DesktopIconClick} = IconSelete.actions
+export const {DesktopIconSelect , DesktopIconClick , DesktopIconRemove} = IconSelete.actions

@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { DesktopIconSelect } from '../Redex/IconSelete';
 import Aboutme from '../Files/About/page';
 import { FolderList } from '../Data/FolderList';
+import { removeFileTask } from '../Redex/CurrentTask';
 const FavList = [
     {
         name : "AirDrop",
@@ -83,7 +84,8 @@ const tagsList = [ {
     name:"Gray",
     coloer:  "bg-macgray" 
 }  ]
-const page = () => {
+const page = ({pageurl,count}) => {
+    console.log("count" , count)
     const FolderLists = FolderList()
     const nodeRef = useRef(null);
     const [size, setSize] = useState({ width: 800, height: 500 })
@@ -95,8 +97,21 @@ const page = () => {
     //redux
     const dispath = useDispatch()
     const isSelectFolder = useSelector((state)=>state.IconSelete.isSeleted)
+    const CurrentTask = useSelector((state)=>state.CurrentTask.file)
 
-  return (
+    const CloseWindow = () => {
+        dispath(DesktopIconSelect(-1))
+        dispath(removeFileTask([]) )
+    }
+
+    const getTopOffset = (count) => {
+        if (count === 0) return -550;
+       
+        return -((500*((count+1))) );
+      };
+
+      
+   return (
     <motion.div 
     initial={{ opacity : 0 , scale: 0.9}}
     animate={{ opacity:100 , scale: 1}}
@@ -118,8 +133,9 @@ const page = () => {
                
             >
     <div ref={nodeRef} 
-    style={{ width: size.width + 'px', height: size.height + 'px' }}
-    className=' absolute -top-[500px] left-[300px]  bg-[#1C1C1E] border-2 border-white/40 rounded-xl z-[30] '>
+    style={{ width: size.width + 'px', height: size.height + 'px' ,  top: `${getTopOffset(count)}px`,
+    left: `${300 + count * 30}px` }}
+    className={`absolute bg-[#1C1C1E] border-2 border-white/40 rounded-xl z-[30] `}>
         <div className=' flex m-4 ' style={{ width: size.width + 'px'}} >
                     {/* SIDER VIEW */}
                   
@@ -127,7 +143,7 @@ const page = () => {
 
                             {/* controll Button */}
                             <div className=' flex gap-2 group '>
-                                <div className=' size-3 bg-[#fe5e56] rounded-full' onClick={()=>dispath(DesktopIconSelect(-1))}>
+                                <div className=' size-3 bg-[#fe5e56] rounded-full' onClick={()=>CloseWindow()}>
                                     <X className=' hidden group-hover:block text-black  size-3'/>
                                 </div>
                                 <div className=' size-3 bg-[#ffbb2c] rounded-full'>
@@ -279,7 +295,8 @@ const page = () => {
                             
                             
                             <div className='mt-5 pr-5 w-full h-full'>
-                            {FolderLists &&  FolderLists[isSelectFolder]?.page}
+                                {pageurl}
+                         
                             </div>
                                
                       </div>
