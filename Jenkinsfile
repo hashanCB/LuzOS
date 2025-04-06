@@ -2,17 +2,13 @@ pipeline {
     agent any
     environment {
         NODE_VERSION = '20.16.0'
-        IMAGE_NAME = 'luzos'  // Define your Docker image name
+        IMAGE_NAME = 'luzos' 
     }
 
     stages {
         stage("Repo Check") {
             steps {
-                script {
-                    git branch: 'main', 
-                    credentialsId: 'github-credentials', 
-                    url: 'https://github.com/hashanCB/mySongs'
-                }
+                checkout scm
             }
         }
         
