@@ -9,7 +9,9 @@ pipeline {
         stage("Repo Check") {
             steps {
                 script {
-                    git 'https://github.com/hashanCB/LuzOS'
+                    git branch: 'main', 
+                    credentialsId: 'github-credentials', 
+                    url: 'https://github.com/hashanCB/mySongs'
                 }
             }
         }
