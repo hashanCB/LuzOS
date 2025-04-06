@@ -23,6 +23,21 @@ pipeline{
           
         }
 
+        stage("GitIncrementVersion"){
+            steps{
+                script{
+                   sh 'npm version patch --no-git-tag-version'
+
+                    sleep(2)
+
+                    
+                    env.VERSION = sh(script: "node -p \"require('./package.json').version\"", returnStdout: true).trim()
+
+                    echo "New version: ${env.VERSION}"
+                }
+            }
+        }
+
         stage("Docker images Build"){
             steps{
                 script{
