@@ -5,7 +5,7 @@ pipeline{
    }
     stages{
         stage("Repo Check"){
-            step{
+            steps{
                 script{
                     git 'https://github.com/hashanCB/LuzOS'
                 }
