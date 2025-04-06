@@ -22,6 +22,15 @@ pipeline{
             }
           
         }
+
+        stage("Docker images Build"){
+            steps{
+                script{
+                     echo "Building Docker image with version: ${env.VERSION}"
+                     sh "docker build -t ${IMAGE_NAME}:${env.VERSION}   ."
+                }
+            }
+        }
     }
   
 }
