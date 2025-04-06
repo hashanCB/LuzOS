@@ -2,6 +2,7 @@ pipeline{
    agent any
    environment{
          NODE_VERSION = '20.16.0'
+         IMAGE_NAME = 'luzos' 
    }
     stages{
         stage("Repo Check"){
