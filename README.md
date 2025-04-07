@@ -20,6 +20,7 @@
 - **Styling:** Tailwind CSS  
 - **Icons & UI Elements:** Custom-designed to resemble macOS  
 - **Deployment:** Vercel (for live demo)
+<img width="1071" alt="Screenshot 2025-04-07 at 19 45 21" src="https://github.com/user-attachments/assets/b4e086a3-3dbd-4201-a3e7-f6d7cdf2f82d" />
 
 ---
 
