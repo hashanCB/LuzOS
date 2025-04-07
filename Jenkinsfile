@@ -43,5 +43,22 @@ pipeline {
                 }
             }
         }
+
+        stage("Git Push Version Incremnt"){
+            steps{
+                script{
+                      withCredentials([usernamePassword(credentialsId: 'githubpat-key', passwordVariable: 'PASS', usernameVariable: 'USER')]) { //github access key need to get anf  after jenkins cedination add username and password(key)
+                        sh '''
+                        git config --global user.email "hashan@Jenkins.com"
+                        git config --global user.name "Jenkins"
+                        git remote set-url origin https://${USER}:${PASS}@github.com/hashanCB/mySongs.git
+                        git add -A
+                        git diff --staged --quiet || git commit -m "ci: version bump [ci skip]"
+                        git push origin HEAD:main
+                        '''
+                    }
+                }
+            }
+        }
     }
 }
