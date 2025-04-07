@@ -51,7 +51,7 @@ pipeline {
                         sh '''
                         git config --global user.email "hashan@Jenkins.com"
                         git config --global user.name "Jenkins"
-                        git remote set-url origin https://${USER}:${PASS}@github.com:hashanCB/LuzOS.git
+                        git remote set-url origin https://${USER}:${PASS}@github.com/hashanCB/LuzOS.git
                         git add -A
                         git diff --staged --quiet || git commit -m "ci: version bump [ci skip]"
                         git push origin HEAD:main
