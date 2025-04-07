@@ -9,7 +9,7 @@ import { Resizable } from 'react-resizable'
 import 'react-resizable/css/styles.css'
 import { animate, motion,  } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux';
-import { DesktopIconSelect } from '../Redex/IconSelete';
+import { DesktopIconRemove, DesktopIconSelect } from '../Redex/IconSelete';
 import Aboutme from '../Files/About/page';
 import { FolderList } from '../Data/FolderList';
 import { removeFileTask } from '../Redex/CurrentTask';
@@ -99,9 +99,10 @@ const page = ({pageurl,count}) => {
     const isSelectFolder = useSelector((state)=>state.IconSelete.isSeleted)
     const CurrentTask = useSelector((state)=>state.CurrentTask.file)
 
-    const CloseWindow = () => {
-        dispath(DesktopIconSelect(-1))
-        dispath(removeFileTask([]) )
+    const CloseWindow = (remmove_win_index) => {
+       // dispath(DesktopIconSelect(-1))
+        dispath(removeFileTask(remmove_win_index))
+        dispath(DesktopIconRemove(remmove_win_index) )
     }
 
     const getTopOffset = (count) => {
@@ -143,7 +144,7 @@ const page = ({pageurl,count}) => {
 
                             {/* controll Button */}
                             <div className=' flex gap-2 group '>
-                                <div className=' size-3 bg-[#fe5e56] rounded-full' onClick={()=>CloseWindow()}>
+                                <div className=' size-3 bg-[#fe5e56] rounded-full' onClick={()=>CloseWindow(count)}>
                                     <X className=' hidden group-hover:block text-black  size-3'/>
                                 </div>
                                 <div className=' size-3 bg-[#ffbb2c] rounded-full'>

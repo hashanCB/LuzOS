@@ -16,7 +16,7 @@ export const CurrentTask = createSlice({
             state.file = [...state.file,action.payload]
         },
         removeFileTask:(state,action)=>{
-            state.file = action.payload
+            state.file = [...state.file.filter((ele,index)=> ele !== action.payload )]
         },
         AddVideiTask : (state,action)=>{
             state.video = [...state.video,action.payload]

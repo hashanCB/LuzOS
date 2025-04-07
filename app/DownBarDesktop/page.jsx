@@ -63,7 +63,14 @@ const page = () => {
                    
                     >
                     <div className=' flex flex-col items-center'>
-                    {ele.url}
+                        <div className=' relative flex items-center'>
+                            {ele.url}
+                            {ele.name === 'Finder' && file.length > 0 ? 
+                                    <div className=' absolute top-0 right-0 size-4 bg-red-500 rounded-full'>
+                                    <p className=' text-[10px]  text-white flex items-center justify-center'>{file.length}</p>
+                                </div>
+                            : null}
+                        </div>
                     {ele.name === 'Finder' && file && file.length ? <p className='size-[6px] rounded-full bg-gray-500'></p> : <p className='size-[6px]  '/>}
                     </div>
                     
