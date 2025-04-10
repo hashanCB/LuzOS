@@ -9,7 +9,7 @@ import { Resizable } from 'react-resizable'
 import 'react-resizable/css/styles.css'
 import { animate, motion,  } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux';
-import { DesktopIconRemove, DesktopIconSelect } from '../Redex/IconSelete';
+import { AddMinSeleted, DesktopIconRemove, DesktopIconSelect } from '../Redex/IconSelete';
 import Aboutme from '../Files/About/page';
 import { FolderList } from '../Data/FolderList';
 import { removeFileTask } from '../Redex/CurrentTask';
@@ -84,8 +84,8 @@ const tagsList = [ {
     name:"Gray",
     coloer:  "bg-macgray" 
 }  ]
-const page = ({pageurl,count}) => {
-    console.log("count" , count)
+const page = ({pageurl,count,ele}) => {
+    
     const FolderLists = FolderList()
     const nodeRef = useRef(null);
     const [size, setSize] = useState({ width: 800, height: 500 })
@@ -98,6 +98,7 @@ const page = ({pageurl,count}) => {
     const dispath = useDispatch()
     const isSelectFolder = useSelector((state)=>state.IconSelete.isSeleted)
     const CurrentTask = useSelector((state)=>state.CurrentTask.file)
+    const MinSelected = useSelector((state)=>state.IconSelete.MinSelected) //this is Array
 
     const CloseWindow = (remmove_win_index) => {
        // dispath(DesktopIconSelect(-1))
@@ -105,9 +106,15 @@ const page = ({pageurl,count}) => {
         dispath(DesktopIconRemove(remmove_win_index) )
     }
 
+    const MinWindow = (min_win_index) => {
+        dispath(AddMinSeleted(min_win_index))
+        
+      
+    }
     const getTopOffset = (count) => {
-        if (count === 0) return -550;
        
+        if (count === 0) return -550;
+    
         return -((500*((count+1))) );
       };
 
@@ -118,6 +125,8 @@ const page = ({pageurl,count}) => {
     animate={{ opacity:100 , scale: 1}}
     exit={{ opacity:0 ,scale:0.9}}
     transition={{duration: 0.3}}
+   
+    style={{ visibility: MinSelected.includes(ele) ? "hidden" : "visible" }}
     >
 
 <Draggable nodeRef={nodeRef} handle='#dragheder' cancel='#scroll-area'>
@@ -148,7 +157,7 @@ const page = ({pageurl,count}) => {
                                     <X className=' hidden group-hover:block text-black  size-3'/>
                                 </div>
                                 <div className=' size-3 bg-[#ffbb2c] rounded-full'>
-                                <Minus className=' hidden group-hover:block text-black  size-3'/>
+                                <Minus className=' hidden group-hover:block text-black  size-3' onClick={()=> MinWindow(ele)}/>
                                 </div>
                                 <div className='  size-3 bg-[#27c73f] rounded-full'>
                                  <Maximize2 className='  hidden group-hover:flex p-[2px] text-black  size-3 font-extrabold rotate-y-180'/>

@@ -2,8 +2,9 @@
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { motion} from 'framer-motion'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import FooterBarIcon from '../Data/FooterBarIcon'
+import { RemoveALLMinSeleted, RemoveMinSeleted } from '../Redex/IconSelete'
 
 const FooterBarIconList = FooterBarIcon()
 const page = () => {
@@ -17,8 +18,17 @@ const page = () => {
     
         setCurrntTak(FooterBarIconList)
     },[])
+
+    const dispath = useDispatch()
+
+    const filecontrol = (name) => {
+        if(name === "Finder"){
+            dispath(RemoveALLMinSeleted())
+        }
+      
+    }
   return (
-    <div className='fixed bottom-0 left-0 right-0  '>
+    <div className='fixed bottom-0 left-0 right-0 z-[999]  '>
        
         <div 
       
@@ -62,7 +72,7 @@ const page = () => {
                     onMouseOut={()=>setHover(null)}
                    
                     >
-                    <div className=' flex flex-col items-center'>
+                    <div className=' flex flex-col items-center ' onClick={()=>filecontrol(ele.name)}>
                         <div className=' relative flex items-center'>
                             {ele.url}
                             {ele.name === 'Finder' && file.length > 0 ? 
