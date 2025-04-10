@@ -2,7 +2,8 @@ pipeline {
     agent any
     environment {
         NODE_VERSION = '20.16.0'
-        IMAGE_NAME = 'luzos' 
+        IMAGE_NAME = 'macsoweb'
+        DOCKER_USER = "hashancch"
     }
 
     stages {
@@ -55,6 +56,20 @@ pipeline {
                         git add -A
                         git diff --staged --quiet || git commit -m "ci: version bump [ci skip]"
                         git push origin HEAD:main
+                        '''
+                    }
+                }
+            }
+        }
+
+        stage("Push To DockerHub"){
+            steps{
+                script{
+                       withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                        sh '''
+                        echo "$PASS" | docker login -u "$USER" --password-stdin
+                        docker tag ${IMAGE_NAME}:${VERSION} ${DOCKER_USER}/${IMAGE_NAME}:${VERSION}
+                        docker push ${DOCKER_USER}/${IMAGE_NAME}:${VERSION}
                         '''
                     }
                 }
