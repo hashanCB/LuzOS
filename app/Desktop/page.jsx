@@ -4,7 +4,7 @@
 import React, { useState } from 'react'
 import Icone from './Icone'
 import { useDispatch } from 'react-redux'
-import { DesktopIconClick, DesktopIconSelect } from '../Redex/IconSelete'
+import { DesktopIconClick, DesktopIconSelect, setzIndexClick } from '../Redex/IconSelete'
 import { FolderList } from '../Data/FolderList'
 import { addFileTask, addTask } from '../Redex/CurrentTask'
 
@@ -17,6 +17,7 @@ const page = () => {
   const SingalClick = (index) =>{
     dispath(DesktopIconSelect(index))
     dispath(addFileTask(index))
+    dispath(setzIndexClick(null))
   }
 
   const OneClick = (index) => {

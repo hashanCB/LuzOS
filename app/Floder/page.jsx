@@ -9,7 +9,7 @@ import { Resizable } from 'react-resizable'
 import 'react-resizable/css/styles.css'
 import { animate, motion,  } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux';
-import { AddMinSeleted, DesktopIconRemove, DesktopIconSelect } from '../Redex/IconSelete';
+import { AddMinSeleted, DesktopIconRemove, DesktopIconSelect, setzIndexClick, zindexClick } from '../Redex/IconSelete';
 import Aboutme from '../Files/About/page';
 import { FolderList } from '../Data/FolderList';
 import { removeFileTask } from '../Redex/CurrentTask';
@@ -84,11 +84,12 @@ const tagsList = [ {
     name:"Gray",
     coloer:  "bg-macgray" 
 }  ]
-const page = ({pageurl,count,ele}) => {
+const page = ({pageurl,count,ele,zindex}) => {
     
     const FolderLists = FolderList()
     const nodeRef = useRef(null);
     const [size, setSize] = useState({ width: 800, height: 500 })
+    const [z_index,set_zindex] = useState(30)
     const iconHind = 400
     const onResize = (event, { size }) => {
         setSize({ width: size.width, height: size.height })
@@ -96,7 +97,7 @@ const page = ({pageurl,count,ele}) => {
 
     //redux
     const dispath = useDispatch()
-    const isSelectFolder = useSelector((state)=>state.IconSelete.isSeleted)
+    
     const CurrentTask = useSelector((state)=>state.CurrentTask.file)
     const MinSelected = useSelector((state)=>state.IconSelete.MinSelected) //this is Array
 
@@ -118,7 +119,10 @@ const page = ({pageurl,count,ele}) => {
         return -((500*((count+1))) );
       };
 
-      
+    const changezindex = (index) => {
+        console.log(index)
+      dispath(setzIndexClick(index))
+    }
    return (
     <motion.div 
     initial={{ opacity : 0 , scale: 0.9}}
@@ -144,8 +148,8 @@ const page = ({pageurl,count,ele}) => {
             >
     <div ref={nodeRef} 
     style={{ width: size.width + 'px', height: size.height + 'px' ,  top: `${getTopOffset(count)}px`,
-    left: `${300 + count * 30}px` }}
-    className={`absolute bg-[#1C1C1E] border-2 border-white/40 rounded-xl z-[30] `}>
+    left: `${300 + count * 30}px` , zIndex: `${zindex}` }}
+    className={`absolute bg-[#1C1C1E] border-2 border-white/40 rounded-xl`} onClick={()=> changezindex(ele)}>
         <div className=' flex m-4 ' style={{ width: size.width + 'px'}} >
                     {/* SIDER VIEW */}
                   

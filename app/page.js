@@ -17,7 +17,7 @@ export default function Home() {
  const VideoLists = VideoList()
  const FolderLists = FolderList()
  const isSelectFolder = useSelector((state)=>state.IconSelete.isSeleted)
- //const MinSelected = useSelector((state)=>state.IconSelete.MinSelected) //this is Array
+ const zindexClick = useSelector((state)=>state.IconSelete.zindexClick) 
   let orderCount = 0
   return (
     <main className="h-screen w-screen bg-[url('/wallpaper/macos-monterey-stock-black-dark-mode-layers-5k-6016x6016-5889.jpg')] bg-cover bg-center overflow-hidden relative">
@@ -32,7 +32,7 @@ export default function Home() {
         {isSelectFolder.length > 0 && isSelectFolder.map((ele,index)=>(
           <div key={index}>
               <AnimatePresence>
-                {(isSelectFolder && isSelectFolder.length > 0  ) ?  <Floder pageurl={FolderLists[ele]?.page} count={index} ele ={ele}/> : [] }
+                {(isSelectFolder && isSelectFolder.length > 0  ) ?  <Floder pageurl={FolderLists[ele]?.page} count={index} ele ={ele} zindex = { ele === zindexClick ? "900" : 30}/> : [] }
                 { orderCount++ }
             </AnimatePresence>
 
@@ -41,7 +41,7 @@ export default function Home() {
      
 
         <AnimatePresence>
-        {isVideoPlay  !== -1 ?  <Videos url={VideoLists[isVideoPlay].url} /> : [] }
+        {isVideoPlay  !== -1 ?  <Videos url={VideoLists[isVideoPlay].url} zindexvideo = { "video" === zindexClick ? "900" : 30} /> : [] }
         </AnimatePresence>
 
         <DownBarDesktop/>

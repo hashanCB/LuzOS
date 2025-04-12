@@ -5,12 +5,17 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
     isSeleted : [],
     isClick : -1,
-    MinSelected : []
+    MinSelected : [],
+    zindexClick : null 
 }
 export const IconSelete = createSlice({
     name:"IconSelete",
     initialState,
     reducers:{
+
+        setzIndexClick (state,action){
+            state.zindexClick = action.payload
+        },
         DesktopIconSelect : (state,action) =>{
             state.isSeleted = [... state.isSeleted ,action.payload]
         },
@@ -38,4 +43,4 @@ export const IconSelete = createSlice({
 })
 
 export default IconSelete.reducer
-export const {DesktopIconSelect , DesktopIconClick , DesktopIconRemove , AddMinSeleted , RemoveMinSeleted , RemoveALLMinSeleted} = IconSelete.actions
+export const {setzIndexClick,DesktopIconSelect , DesktopIconClick , DesktopIconRemove , AddMinSeleted , RemoveMinSeleted , RemoveALLMinSeleted} = IconSelete.actions

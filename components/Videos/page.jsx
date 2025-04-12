@@ -8,7 +8,8 @@ import { useDispatch } from 'react-redux';
 import { Resizable } from 'react-resizable';
 import 'react-resizable/css/styles.css'; 
 import {motion} from 'framer-motion'
-const VideoPlayer = ({ url }) => {
+import { setzIndexClick } from '@/app/Redex/IconSelete';
+const VideoPlayer = ({ url ,zindexvideo}) => {
   const nodeRef = useRef(null);
      const [size, setSize] = useState({ width: 800, height: 500 })
      const onResize = (event, { size }) => {
@@ -21,8 +22,9 @@ const VideoPlayer = ({ url }) => {
  <Draggable nodeRef={nodeRef} handle='#halder-drag'>
  <div
         ref={nodeRef}
-        className="absolute z-[50] top-5 left-5"
-        style={{ width: size.width, height: size.height }}
+        onClick={()=>dispath(setzIndexClick("video"))}
+        className="absolute z-[910] top-5 left-5"
+        style={{ width: size.width, height: size.height, zIndex: zindexvideo}}
       >
 <Resizable
                 width={size.width}
@@ -31,11 +33,11 @@ const VideoPlayer = ({ url }) => {
                 minConstraints={[500, 100]}
                 maxConstraints={[1600, 1000]}
                 resizeHandles={['ne', 'nw', 'se', 'sw']}
-                className=' absolute z-[50]'
+                className=' absolute '
             >
     <div
      
-    className="absolute z-[50] top-[20px] left-[10px]  p-1 rounded-b-md ">
+    className="absolute  top-[20px] left-[10px]  p-1 rounded-b-md ">
       <div id='halder-drag' className='bg-[#1C1C1E] h-6 flex items-center rounded-t-md   '>
          
          <div className=' flex gap-2 group m-2 ml-4 items-center '>
