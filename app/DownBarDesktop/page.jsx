@@ -5,25 +5,55 @@ import { motion} from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux'
 import FooterBarIcon from '../Data/FooterBarIcon'
 import { RemoveALLMinSeleted, RemoveMinSeleted } from '../Redex/IconSelete'
+import { addMinvideo } from '../Redex/VideoSelect'
 
 const FooterBarIconList = FooterBarIcon()
 const page = () => {
+    
     const [hover,setHover] = useState(undefined)
-    const [cueentTask,setCurrntTak] = useState()
+    const [cueentTask,setCurrntTak] = useState([])
 
     //redux using get currentTask file
     const file = useSelector((state)=>state.CurrentTask.file)
   
+    const isVideoindex = useSelector((state)=>state.VideoSelect.isVideoindex)
     useEffect( ()=>{
     
-        setCurrntTak(FooterBarIconList)
+        setCurrntTak(...cueentTask ,FooterBarIconList)
     },[])
+
+    useEffect(()=>{
+         const VideoIcone =   {
+                     name : "VLC Player",
+                     url : <Image src={'/Logo/vlcmain.png'} className=' w-[45px] h-[45px]' width={180} height={180} alt='apple vlc' />
+                 }
+
+                 const resetfooterbar = () => {
+                    const size = FooterBarIconList.length
+                    const currentsize = cueentTask.length
+                    if( currentsize > size) {
+                    const findindex = cueentTask.findIndex((ele)=> ele.name === "VLC Player" )
+                    const filterarrat = cueentTask.filter((ele,index)=> index !== findindex )
+                    setCurrntTak(filterarrat)
+                    }
+                 } 
+
+        isVideoindex !== -1 ?
+        setCurrntTak([...cueentTask , VideoIcone]) 
+        : resetfooterbar()
+
+     
+    },[isVideoindex])
 
     const dispath = useDispatch()
 
     const filecontrol = (name) => {
         if(name === "Finder"){
             dispath(RemoveALLMinSeleted())
+        }
+
+        if (name === "VLC Player"){
+            dispath(addMinvideo(null))
         }
       
     }
@@ -81,7 +111,7 @@ const page = () => {
                                 </div>
                             : null}
                         </div>
-                    {ele.name === 'Finder' && file && file.length ? <p className='size-[6px] rounded-full bg-gray-500'></p> : <p className='size-[6px]  '/>}
+                    {ele.name === 'Finder' || ele.name === "VLC Player" && file && file.length ? <p className='size-[6px] rounded-full bg-gray-500'></p> : <p className='size-[6px]  '/>}
                     </div>
                     
                     </motion.div>

@@ -1,13 +1,13 @@
 'use client'
 import { Bluetooth, Keyboard, Search, Wifi } from 'lucide-react'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const MenuList = ["File", "Edit", "Selection", "View", "Go", "Run", "Terminal", "Window", "Help"]
 
 const WifiMenu = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
-  
+ 
   return (
     <div className="absolute right-20 top-8 w-80 bg-[#1C1C1E] rounded-xl shadow-xl text-white overflow-hidden">
       <div className="p-4 border-b border-gray-700">
@@ -58,7 +58,28 @@ const WifiMenu = ({ isOpen, onClose }) => {
 
 const TopBar = () => {
   const [isWifiOpen, setIsWifiOpen] = useState(false);
+  const [currentTime, setCurrentTime] = useState(
+    new Date().toLocaleString('en-US', {
+      weekday: 'short',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    })
+  );
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(
+        new Date().toLocaleString('en-US', {
+          weekday: 'short',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+        })
+      );
+    }, 1000);
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
   return (
     <div className='fixed top-0 left-0 right-0 h-8 bg-black/40 backdrop-blur-md  z-50'>
       <div className='flex items-center justify-between px-4 h-full'>
@@ -119,14 +140,7 @@ const TopBar = () => {
             />
           </div>
           <div className='text-sm text-white'>
-            {new Date().toLocaleString('en-US', {
-              weekday: 'short',
-              day: '2-digit',
-              month: 'short',
-              hour: '2-digit',
-              minute: '2-digit',
-              hour12: false
-            }).replace(/,/g, '')}
+            {currentTime}
           </div>
         </div>
       </div>

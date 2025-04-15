@@ -1,5 +1,5 @@
 'use client'
-import { setVideosindex } from '@/app/Redex/VideoSelect';
+import { addMinvideo, setVideosindex } from '@/app/Redex/VideoSelect';
 import { Maximize2, Minus, X } from 'lucide-react';
 import React, { useRef, useState } from 'react';
 import Draggable from 'react-draggable';
@@ -9,7 +9,7 @@ import { Resizable } from 'react-resizable';
 import 'react-resizable/css/styles.css'; 
 import {motion} from 'framer-motion'
 import { setzIndexClick } from '@/app/Redex/IconSelete';
-const VideoPlayer = ({ url ,zindexvideo}) => {
+const VideoPlayer = ({ url ,zindexvideo,videoid}) => {
   const nodeRef = useRef(null);
      const [size, setSize] = useState({ width: 800, height: 500 })
      const onResize = (event, { size }) => {
@@ -45,7 +45,7 @@ const VideoPlayer = ({ url ,zindexvideo}) => {
                        <X className=' hidden group-hover:block text-black  size-3'/>
                   </div>
                   <div className=' size-3 bg-[#ffbb2c] rounded-full'>
-                   <Minus className=' hidden group-hover:block text-black  size-3'/>
+                   <Minus className=' hidden group-hover:block text-black  size-3' onClick={() => dispath(addMinvideo(videoid))}/>
                     </div>
                    <div className='  size-3 bg-[#27c73f] rounded-full'>
                     <Maximize2 className='  hidden group-hover:flex p-[2px] text-black  size-3 font-extrabold rotate-y-180'/>

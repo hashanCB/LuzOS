@@ -18,6 +18,7 @@ export default function Home() {
  const FolderLists = FolderList()
  const isSelectFolder = useSelector((state)=>state.IconSelete.isSeleted)
  const zindexClick = useSelector((state)=>state.IconSelete.zindexClick) 
+ const isMinVideos = useSelector((state)=>state.VideoSelect.MinVideos)
   let orderCount = 0
   return (
     <main className="h-screen w-screen bg-[url('/wallpaper/macos-monterey-stock-black-dark-mode-layers-5k-6016x6016-5889.jpg')] bg-cover bg-center overflow-hidden relative">
@@ -39,10 +40,12 @@ export default function Home() {
           </div>
         ))}
      
-
-        <AnimatePresence>
-        {isVideoPlay  !== -1 ?  <Videos url={VideoLists[isVideoPlay].url} zindexvideo = { "video" === zindexClick ? "900" : 30} /> : [] }
-        </AnimatePresence>
+          <div style={{  visibility : isMinVideos !== null ?  "hidden" : "visible" }}>
+              <AnimatePresence>
+            {isVideoPlay  !== -1 ?  <Videos url={VideoLists[isVideoPlay].url} videoid={isVideoPlay.id} zindexvideo = { "video" === zindexClick ? "900" : 30} /> : [] }
+            </AnimatePresence>
+          </div>
+       
 
         <DownBarDesktop/>
        
