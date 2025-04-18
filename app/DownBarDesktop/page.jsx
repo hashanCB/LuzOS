@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import FooterBarIcon from '../Data/FooterBarIcon'
 import { RemoveALLMinSeleted, RemoveMinSeleted } from '../Redex/IconSelete'
 import { addMinvideo } from '../Redex/VideoSelect'
+import { addMinphotos } from '../Redex/PhotoSelect'
 
 const FooterBarIconList = FooterBarIcon()
 const page = () => {
@@ -17,33 +18,71 @@ const page = () => {
     const file = useSelector((state)=>state.CurrentTask.file)
   
     const isVideoindex = useSelector((state)=>state.VideoSelect.isVideoindex)
+    const isPhotosindex = useSelector((state)=>state.PhotoSelect.isPhotosindex)
+  
     useEffect( ()=>{
     
         setCurrntTak(...cueentTask ,FooterBarIconList)
     },[])
 
     useEffect(()=>{
-         const VideoIcone =   {
-                     name : "VLC Player",
-                     url : <Image src={'/Logo/vlcmain.png'} className=' w-[45px] h-[45px]' width={180} height={180} alt='apple vlc' />
-                 }
-
-                 const resetfooterbar = () => {
+       
+         const Photoicon =   {
+                    name : "Photos",
+                    url : <Image src={'/Logo/photos.png'} className=' w-[45px] h-[45px]' width={180} height={180} alt='apple photo' />
+                }
+                 const resetfooterbar = (removename) => {
                     const size = FooterBarIconList.length
                     const currentsize = cueentTask.length
                     if( currentsize > size) {
-                    const findindex = cueentTask.findIndex((ele)=> ele.name === "VLC Player" )
-                    const filterarrat = cueentTask.filter((ele,index)=> index !== findindex )
-                    setCurrntTak(filterarrat)
+                        let findindex  = null
+                       
+                         if (removename === "Photo"){
+                             findindex = cueentTask.findIndex((ele)=> ele.name === "Photos" )
+                          const filterarrat = cueentTask.filter((ele,index)=> index !== findindex )
+                             setCurrntTak(filterarrat)
+                        }
+                     
                     }
                  } 
 
-        isVideoindex !== -1 ?
-        setCurrntTak([...cueentTask , VideoIcone]) 
-        : resetfooterbar()
+       
 
+        isPhotosindex !== -1 ?
+        setCurrntTak([...cueentTask , Photoicon]) 
+        : resetfooterbar("Photo")
      
-    },[isVideoindex])
+    },[isPhotosindex])
+
+    useEffect(()=>{
+        const VideoIcone =   {
+                    name : "VLC Player",
+                    url : <Image src={'/Logo/vlcmain.png'} className=' w-[45px] h-[45px]' width={180} height={180} alt='apple vlc' />
+                }
+        
+                const resetfooterbar = (removename) => {
+                   const size = FooterBarIconList.length
+                   const currentsize = cueentTask.length
+                   if( currentsize > size) {
+                       let findindex  = null
+                       if (removename === "VLC" ){
+                            findindex = cueentTask.findIndex((ele)=> ele.name === "VLC Player" )
+                            const filterarrat = cueentTask.filter((ele,index)=> index !== findindex )
+                            setCurrntTak(filterarrat)
+                       }
+                    
+                    
+                   }
+                } 
+
+       isVideoindex !== -1 ?
+       setCurrntTak([...cueentTask , VideoIcone]) 
+       : resetfooterbar("VLC")
+
+    
+   },[isVideoindex])
+
+
 
     const dispath = useDispatch()
 
@@ -54,6 +93,11 @@ const page = () => {
 
         if (name === "VLC Player"){
             dispath(addMinvideo(null))
+            
+        }
+
+        if (name === "Photos"){
+            dispath(addMinphotos(null))
         }
       
     }
@@ -111,7 +155,10 @@ const page = () => {
                                 </div>
                             : null}
                         </div>
-                    {ele.name === 'Finder' || ele.name === "VLC Player" && file && file.length ? <p className='size-[6px] rounded-full bg-gray-500'></p> : <p className='size-[6px]  '/>}
+                    {ele.name === 'Finder' && file && file.length ? <p className='size-[4px] rounded-full bg-gray-500'></p> : <p className='size-[4px]  '/>}
+                    
+                    { (ele.name === 'VLC Player' || ele.name === "Photos" ) ? <p className='size-[4px] rounded-full bg-gray-500'></p> : <p className='size-[4px]  '/>}
+                   
                     </div>
                     
                     </motion.div>

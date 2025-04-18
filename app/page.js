@@ -7,7 +7,9 @@ import DownBarDesktop from '@/app/DownBarDesktop/page'
 import Videos from '@/components/Videos/page'
 import { AnimatePresence } from 'framer-motion';
 import VideoList from './Data/VideoList';
+import PhotoView from '@/components/PhotoView/page'
 import { FolderList } from './Data/FolderList';
+import ImageList from './Data/ImageList';
 
 export default function Home() {
 
@@ -16,9 +18,15 @@ export default function Home() {
 
  const VideoLists = VideoList()
  const FolderLists = FolderList()
+ const PhotoList = ImageList()
  const isSelectFolder = useSelector((state)=>state.IconSelete.isSeleted)
  const zindexClick = useSelector((state)=>state.IconSelete.zindexClick) 
+
  const isMinVideos = useSelector((state)=>state.VideoSelect.MinVideos)
+
+ const isMinPhotos = useSelector((state)=>state.PhotoSelect.MinPhotos)
+ const isPhotosindex = useSelector((state)=>state.PhotoSelect.isPhotosindex)
+
   let orderCount = 0
   return (
     <main className="h-screen w-screen bg-[url('/wallpaper/macos-monterey-stock-black-dark-mode-layers-5k-6016x6016-5889.jpg')] bg-cover bg-center overflow-hidden relative">
@@ -42,9 +50,17 @@ export default function Home() {
      
           <div style={{  visibility : isMinVideos !== null ?  "hidden" : "visible" }}>
               <AnimatePresence>
-            {isVideoPlay  !== -1 ?  <Videos url={VideoLists[isVideoPlay].url} videoid={isVideoPlay.id} zindexvideo = { "video" === zindexClick ? "900" : 30} /> : [] }
+            {isVideoPlay  !== -1 ?  <Videos url={VideoLists[isVideoPlay].url} videoid={isVideoPlay}   zindexvideo = { "video" === zindexClick ? "900" : 30} /> : [] }
             </AnimatePresence>
           </div>
+
+
+          <div style={{  visibility : isMinPhotos !== null ?  "hidden" : "visible" }}>
+              <AnimatePresence>
+            {isPhotosindex  !== -1 ?  <PhotoView imageURL={PhotoList[isPhotosindex].url} photoid={isPhotosindex} zindexvphtos = { "photos" === zindexClick ? "900" : 30} /> : [] }
+            </AnimatePresence>
+       
+         </div>
        
 
         <DownBarDesktop/>

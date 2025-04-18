@@ -9,8 +9,21 @@ import { Resizable } from 'react-resizable';
 import 'react-resizable/css/styles.css'; 
 import {motion} from 'framer-motion'
 import { setzIndexClick } from '@/app/Redex/IconSelete';
-import { removeFileTask } from '@/app/Redex/CurrentTask';
-const VideoPlayer = ({ url ,zindexvideo,videoid}) => {
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import { addMinphotos, setphotosindex } from '@/app/Redex/PhotoSelect';
+import Image from 'next/image';
+
+
+const Page = ({ imageURL ,zindexvphtos,photoid}) => {
+
+  const [open, setOpen] = useState(false);
+
+  const slides = [
+    {
+      src: imageURL,
+    },
+  ];
   const nodeRef = useRef(null);
      const [size, setSize] = useState({ width: 800, height: 500 })
      const onResize = (event, { size }) => {
@@ -18,18 +31,14 @@ const VideoPlayer = ({ url ,zindexvideo,videoid}) => {
   }
   const dispath = useDispatch()
 
-  const CloseWinodws = (count) => {
-    dispath(setVideosindex(-1))
-  
-  }
   return (
   
  <Draggable nodeRef={nodeRef} handle='#halder-drag'>
  <div
         ref={nodeRef}
-        onClick={()=>dispath(setzIndexClick("video"))}
+        onClick={()=>dispath(setzIndexClick("photos"))}
         className="absolute z-[910] top-5 left-5"
-        style={{ width: size.width, height: size.height, zIndex: zindexvideo}}
+        style={{ width: size.width, height: size.height, zIndex: zindexvphtos}}
       >
 <Resizable
                 width={size.width}
@@ -46,11 +55,11 @@ const VideoPlayer = ({ url ,zindexvideo,videoid}) => {
       <div id='halder-drag' className='bg-[#1C1C1E] h-6 flex items-center rounded-t-md   '>
          
          <div className=' flex gap-2 group m-2 ml-4 items-center '>
-                   <div className=' size-3 bg-[#fe5e56] rounded-full'  onClick={()=> CloseWinodws()}>
+                   <div className=' size-3 bg-[#fe5e56] rounded-full'  onClick={()=> dispath(setphotosindex(-1))}>
                        <X className=' hidden group-hover:block text-black  size-3'/>
                   </div>
                   <div className=' size-3 bg-[#ffbb2c] rounded-full'>
-                   <Minus className=' hidden group-hover:block text-black  size-3' onClick={() => dispath(addMinvideo(videoid))}/>
+                   <Minus className=' hidden group-hover:block text-black  size-3' onClick={() => dispath(addMinphotos(photoid))}/>
                     </div>
                    <div className='  size-3 bg-[#27c73f] rounded-full'>
                     <Maximize2 className='  hidden group-hover:flex p-[2px] text-black  size-3 font-extrabold rotate-y-180'/>
@@ -63,15 +72,21 @@ const VideoPlayer = ({ url ,zindexvideo,videoid}) => {
           </div>
       </div>
          
-      <div className=' rounded-b-md '>
-          <ReactPlayer 
-            url={url} 
-            controls={true}    // Show built-in controls (play, pause, volume, etc.)
-            playing={true} 
-            width="100%"       // Make the video responsive
-            height="100%"      // Set the height based on the container
-          />
-      </div>
+      <div >
+      
+      {/* Clickable image preview */}
+      <Image
+        src={imageURL}
+        width={size.width}
+        height={size.height}
+        alt="photo preview"
+        className="cursor-pointer rounded shadow-lg"
+        onClick={() => setOpen(true)}
+      />
+
+      {/* Lightbox viewer */}
+      <Lightbox open={open} close={() => setOpen(false)} slides={slides} />
+    </div>
    
     </div>
     </Resizable>
@@ -81,4 +96,4 @@ const VideoPlayer = ({ url ,zindexvideo,videoid}) => {
   );
 };
 
-export default VideoPlayer;
+export default Page;

@@ -18,6 +18,9 @@ export const CurrentTask = createSlice({
         removeFileTask:(state,action)=>{
             state.file = [...state.file.filter((ele,index)=> ele !== action.payload )]
         },
+        removesingaltaskfile:(state,action)=>{
+            state.file = []
+        },
         AddVideiTask : (state,action)=>{
             state.video = [...state.video,action.payload]
         }
@@ -25,4 +28,4 @@ export const CurrentTask = createSlice({
 })
 
 export default CurrentTask.reducer
-export const { addFileTask , AddVideiTask , removeFileTask} = CurrentTask.actions
+export const { addFileTask , AddVideiTask , removeFileTask , removesingaltaskfile} = CurrentTask.actions

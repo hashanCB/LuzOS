@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AddMinSeleted, DesktopIconRemove, DesktopIconSelect, setzIndexClick, zindexClick } from '../Redex/IconSelete';
 import Aboutme from '../Files/About/page';
 import { FolderList } from '../Data/FolderList';
-import { removeFileTask } from '../Redex/CurrentTask';
+import { removeFileTask, removesingaltaskfile } from '../Redex/CurrentTask';
 const FavList = [
     {
         name : "AirDrop",
@@ -100,10 +100,17 @@ const page = ({pageurl,count,ele,zindex}) => {
     
     const CurrentTask = useSelector((state)=>state.CurrentTask.file)
     const MinSelected = useSelector((state)=>state.IconSelete.MinSelected) //this is Array
-
+    const file = useSelector((state)=>state.CurrentTask.file)
     const CloseWindow = (remmove_win_index) => {
+  
+          if( file.length > 1){
+            dispath(removeFileTask(remmove_win_index))
+          }else{
+            dispath(removesingaltaskfile())
+          }
+       console.log("file",file,"remmove_win_index",remmove_win_index)
        // dispath(DesktopIconSelect(-1))
-        dispath(removeFileTask(remmove_win_index))
+      
         dispath(DesktopIconRemove(remmove_win_index) )
     }
 
