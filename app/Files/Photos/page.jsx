@@ -1,3 +1,4 @@
+'use client'
 import ImageList from '@/app/Data/ImageList'
 import { setzIndexClick } from '@/app/Redex/IconSelete'
 import { setphotosindex, setphotosOneClick } from '@/app/Redex/PhotoSelect'
